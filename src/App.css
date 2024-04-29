@@ -1,38 +1,149 @@
-.App {
+/* Notes.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 20vw;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  transition: width 0.3s;
+}
+
+.sidebar h1 {
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.notes-list {
+  list-style-type: none;
+  padding: 0;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.notes-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.notes-list li:hover {
+  background-color: #e0e0e0;
+}
+
+.main {
+  width: 80vw;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  transition: width 0.3s;
+}
+
+.header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.input-container {
+  display: flex;
+  margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input-container input,
+.update-container input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+}
+
+.input-container button,
+.update-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #090909;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.input-container button:hover,
+.update-container button:hover {
+  background-color: #0c0c0c;
+  border-color: #161616;
+  border-radius: 20px;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+}
+
+.buttons-container button {
+  margin-right: 5px;
+}
+
+.update-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.update-container input {
+  margin-right: 10px;
+}
+
+.toggle-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #0e0e0e;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+.toggle-btn:hover {
+  background-color: #f5f7f9;
+  color: black;
+
+}
+
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode .sidebar {
+  background-color: #555;
+}
+
+.dark-mode .notes-list li {
+  background-color: #444;
+}
+
+.dark-mode .input-container input,
+.dark-mode .update-container input {
+  background-color: #555;
+  color: #fff;
+}
+
+.dark-mode .toggle-btn {
+  background-color: #fefefe;
+  color: black;
 }
