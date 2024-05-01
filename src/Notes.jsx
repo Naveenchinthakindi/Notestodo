@@ -13,7 +13,7 @@ const Notes = () => {
   const [searchInput, setSearchInput] = useState(''); 
   const [darkMode, setDarkMode] = useState(false); 
   const [showpopUP,setShowpopUp] = useState(false);
-
+  const [deleteid, setDeleteId] = useState()
   useEffect(() => {
     fetchNotes();
   }, []);
@@ -49,9 +49,14 @@ const Notes = () => {
   };
 
   const deleteNote = (id) => {
+
+
+    console.log("calling from customapp ", id)
     try {
       const noteRef = ref(db, `notes/${id}`);
       remove(noteRef);
+
+      setShowpopUp(false)
     } catch (error) {
       console.error('Error deleting note:', error);
     }
@@ -82,6 +87,14 @@ const Notes = () => {
     setUpdateInput('');
   };
 
+  const popUpmethod = (id)=>{
+    setShowpopUp(true)
+    setDeleteId(id)
+    // console.log("id i ",id)
+
+    // deleteNote(id)
+  }
+
   const filteredNotes = notes.filter((note) =>
     note.title && note.title.toLowerCase().includes(searchInput.toLowerCase())
   );
@@ -97,7 +110,7 @@ const Notes = () => {
         <h1 onClick={clearSelectedNote}>Notes</h1>
         <ul className="notes-list">
           {notes.map((note) => (
-            <li key={note.id} onClick={() => selectNote(note)}>{note.title}<button onClick={()=>setShowpopUp(true)}><i class="bi bi-trash"></i></button></li>
+            <li key={note.id} onClick={() => selectNote(note)}>{note.title}<button onClick={()=>popUpmethod(note.id)}><i class="bi bi-trash"></i></button></li>
           ))}
         </ul>
       </div>
@@ -124,7 +137,7 @@ const Notes = () => {
         </div>
         
         <ul className="notes-list">
-        {showpopUP && <CustomApp showpopUP={showpopUP} setShowpopUp={setShowpopUp}/>}
+        {showpopUP && <CustomApp showpopUP={showpopUP} setShowpopUp={setShowpopUp} deleteNote={deleteNote} keyid={deleteid} />}
           {filteredNotes.map((note) => (
             <li key={note.id}>
               <h2>{note.title}</h2>

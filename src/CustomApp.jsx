@@ -1,7 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function CustomApp({showpopUP,setShowpopUp}) {
+function CustomApp({showpopUP,setShowpopUp ,id,keyid,deleteNote}) {
+
+    console.log("customapp data ",keyid)
+
+    const deletemethod = ()=>{
+        deleteNote(keyid)
+
+
+    }
+
   return (
     <div
       className="modal show popup"
@@ -18,7 +27,9 @@ function CustomApp({showpopUP,setShowpopUp}) {
 
         <Modal.Footer>
             {/* <button  onClick = {()=>setShowpopUp(false)}  variant="secondary"></button> */}
-          <Button onClick = {()=>setShowpopUp(false)}  variant="secondary">Close</Button>
+          <Button onClick = {()=>setShowpopUp(false)}  variant="secondary">Cancel</Button>
+          <Button onClick = {()=>deletemethod()}  variant="secondary">YES</Button>
+          
         
         </Modal.Footer>
       </Modal.Dialog>
