@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, push, remove, onValue, set } from 'firebase/database';
 import { app } from './Firebase';
+import CustomApp from './CustomApp';
 
 const db = getDatabase(app);
 
@@ -11,6 +12,7 @@ const Notes = () => {
   const [selectedNote, setSelectedNote] = useState(null); 
   const [searchInput, setSearchInput] = useState(''); 
   const [darkMode, setDarkMode] = useState(false); 
+  const [showpopUP,setShowpopUp] = useState(false);
 
   useEffect(() => {
     fetchNotes();
@@ -85,12 +87,17 @@ const Notes = () => {
   );
 
   return (
-    <div className={`app ${darkMode ? 'dark-mode' : ''}`}>
+
+
+    <>
+     {/* {showpopUP ? <CustomApp showpopUP={showpopUP} setShowpopUp={setShowpopUp}/>: */}
+     
+     <div className={`app ${darkMode ? 'dark-mode' : ''}`}> 
       <div className="sidebar">
         <h1 onClick={clearSelectedNote}>Notes</h1>
         <ul className="notes-list">
           {notes.map((note) => (
-            <li key={note.id} onClick={() => selectNote(note)}>{note.title}</li>
+            <li key={note.id} onClick={() => selectNote(note)}>{note.title}<button onClick={()=>setShowpopUp(true)}><i class="bi bi-trash"></i></button></li>
           ))}
         </ul>
       </div>
@@ -115,7 +122,9 @@ const Notes = () => {
           />
           <button onClick={addNote}>Add Note</button>
         </div>
+        
         <ul className="notes-list">
+        {showpopUP && <CustomApp showpopUP={showpopUP} setShowpopUp={setShowpopUp}/>}
           {filteredNotes.map((note) => (
             <li key={note.id}>
               <h2>{note.title}</h2>
@@ -140,6 +149,11 @@ const Notes = () => {
         )}
       </div>
     </div>
+    
+    </>
+
+   
+    
   );
 };
 
