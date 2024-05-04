@@ -5,6 +5,9 @@ import { database } from "../Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { set, ref } from "firebase/database";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function SignIn() {
   const [user, setUser] = useState();
@@ -15,6 +18,12 @@ function SignIn() {
     const { name, value } = e.target;
 
     setUser({ ...user, [name]: value });
+  };
+
+  const showToastMessage = () => {
+    toast.success("Success Notification !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -34,10 +43,13 @@ function SignIn() {
             password: user?.password,
           });
 
+         
+
           navigate("/notes");
         }
       } catch (error) {
-        alert(error.code);
+        // alert(error.code);
+        toast.error("Sign Up Erro ".error.code)
         console.log("user Sign Up Error ", error, error.code);
       }
     } else {

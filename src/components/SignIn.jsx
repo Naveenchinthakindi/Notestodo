@@ -4,6 +4,9 @@ import Form from "react-bootstrap/Form";
 import { database } from "../Firebase";
 import {  signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+
 
 function SignIn() {
   const [user, setUser] = useState();
@@ -28,11 +31,12 @@ function SignIn() {
       if (userCredential && userCredential.user) {
         console.log("userCred ", userCredential);
         localStorage.setItem("userID",JSON.stringify(userCredential?.user?.uid))
-      
+        toast.success("Successfully signed In!")
         navigate("/notes");
       }
 
     } catch (error) {
+      toast.error("Unscussful Login ",error.code)
       console.log("user Sign in Error ", error);
     }
     console.log("submit");
