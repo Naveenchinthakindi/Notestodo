@@ -74,6 +74,7 @@ function SignIn() {
       <Button variant="primary" type="submit">
         Sign Up
       </Button>
+      <Button variant="primary" onClick={()=>navigate("/signin")}>Sign IN</Button>
     </Form>
   );
 }

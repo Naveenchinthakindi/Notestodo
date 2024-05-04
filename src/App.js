@@ -8,9 +8,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {/* <Notes/> */}
-        {/* <SignIn />
-        <SignUp /> */}
         <Routes>
           <Route path="/" element={<SignUp/>}/>
           <Route path="/signin" element={<SignIn />} />
