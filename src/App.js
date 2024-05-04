@@ -1,11 +1,24 @@
-import Notes from './Notes';
-import './App.css';
+import Notes from "./components/Notes";
+import "./App.css";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-     <Notes/>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        {/* <Notes/> */}
+        {/* <SignIn />
+        <SignUp /> */}
+        <Routes>
+          <Route path="/" element={<SignUp/>}/>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/notes" element={<Notes />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
