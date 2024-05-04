@@ -11,6 +11,7 @@ body {
 .app {
   display: flex;
   height: 100vh;
+  margin: auto;
 }
 .dlt{
   background-color: #ccc;
@@ -27,6 +28,21 @@ body {
   width: 30vw;
 }
 
+.form{
+  background-color:whitesmoke;
+  width: auto;
+  max-width: 300px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  /* text-align: center; */
+}
+.eye-icon{
+  position: relative;
+  transform: translateY(-50%);
+  left: 90%;
+  margin-top: -20px;
+}
 .sidebar {
   width: 20vw;
   background-color: #f4f4f4;

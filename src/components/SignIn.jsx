@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const [user, setUser] = useState();
+  const [showPassword,setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -42,8 +43,8 @@ function SignIn() {
   };
 
   return (
-    <Form className="w-50 m-auto" onSubmit={handleSubmit}>
-      <h1>Sign IN</h1>
+    <Form className="form" onSubmit={handleSubmit}>
+      <h1>Log In</h1>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control
@@ -59,14 +60,18 @@ function SignIn() {
         <Form.Control
           name="password"
           onChange={handleChange}
-          type="text"
+          type={showPassword?"text":"password"}
           placeholder="Password"
         />
+         <div className="eye-icon" onClick={()=>setShowPassword(!showPassword)}>
+            {showPassword&& <i class="bi bi-eye-fill"></i>}
+            {!showPassword && <i class="bi bi-eye-slash-fill"></i>}
+          </div>
       </Form.Group>
-      <Button variant="primary" type="submit">
-      Sign In 
+      <Button className="d-block m-2" variant="primary" type="submit">
+      Log In
       </Button>
-      <Button variant="primary" onClick = {()=>navigate("/signup")}>Sign Up</Button>
+      <Button className="d-block m-2" variant="primary" onClick = {()=>navigate("/signup")}>Register</Button>
     </Form>
   );
 }
