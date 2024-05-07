@@ -5,7 +5,7 @@ import { database } from "../Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { set, ref } from "firebase/database";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function SignIn() {
@@ -55,27 +55,34 @@ function SignIn() {
           user?.password
         );
 
-        console.log('user creditionals ',userCredential)
+        console.log("user creditionals ", userCredential);
 
-        if (userCredential && userCredential.user) {
-          await set(ref(database, `users/${userCredential.user.uid}`), {
-            email: user?.email,
-            password: user?.password,
-          });
+        if (userCredential && userCredential?.user) {
+          console.log("inside ", userCredential.user);
+          const res = await set(
+            ref(database, `users/${userCredential?.user?.uid}`),
+            {
+              email: user?.email,
+              password: user?.password,
+            }
+          );
 
-          navigate("/notes");
+          console.log("res ", res);
+
+          navigate("/");
         }
       } catch (error) {
         // alert(error.code);
+        navigate("/");
         toast.error("Sign Up Erro ".error?.code);
-        console.log("user Sign Up Error ", error, error.code);
+        console.log("user Sign Up Error ", error);
       }
     } else {
       alert("password donot match");
     }
   };
 
-  console.log("user ",user  )
+  console.log("user ", user);
 
   console.log("validation error ", validateErrors);
 
@@ -145,12 +152,12 @@ function SignIn() {
           </Button>
           <a href="/signin">Sign In</a>
           {/* <Button
-        className="m-2"
-        variant="primary"
-        onClick={() => navigate("/signin")}
-      >
-        Sign IN
-      </Button> */}
+          className="m-2"
+          variant="primary"
+          onClick={() => navigate("/signin")}
+        >
+          Sign IN
+        </Button> */}
         </Form>
       </div>
     </div>

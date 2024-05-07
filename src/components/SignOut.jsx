@@ -10,6 +10,7 @@ const SignOut = () => {
     const handleSignout = ()=>{
         signOut(database).then((data)=>{
             console.log("success logout ",data );
+            localStorage.clear();
             navigate("/signin")
         })
     }
