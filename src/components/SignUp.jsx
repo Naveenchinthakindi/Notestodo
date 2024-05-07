@@ -116,6 +116,7 @@ function SignIn() {
               type={showPassword ? "text" : "password"}
               placeholder="Enter Password"
               style={{ paddingRight: "2.5rem" }}
+              className="mb-2 mt-2"
             />
             <div
               className="eye-icon"
