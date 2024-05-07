@@ -10,41 +10,96 @@ body {
 }
 .app {
   display: flex;
-  height: 100vh;
+  /* height: 100vh; */
   margin: auto;
+  width: 100%;
+  
+}
+input{
+  cursor: pointer;
 }
 .dlt{
-  background-color: #ccc;
   color: red;
   border-radius: 50%;
 }
 
-.popup{
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background-color: blueviolet;
-  color: white;
-  width: 30vw;
+
+.modalBackground {
+  position: fixed;
+  background-color: black;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  z-index: 99;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.modalContainer {
+  background-color:white;
+  box-shadow: 0px 0px 0px #888;
+  padding: 10px;
+  border-radius: 10px;
+  height: auto;
+  width: 300px;
+  text-align: center;
+}
+.signinhome{
+  display: flex;
+  justify-content: center;
+}
+.signnimg{
+  height: 200px;
+}
+.resetform{
+  margin: auto;
+  width: 50%;
+}
+
+.para-error{
+  color: red;
+}
+
+img{
+  height: 500px;
+}
+.modal-content{
+/* height: 180px; */
+}
+.footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
 }
 
 .form{
-  background-color:whitesmoke;
+  background-color:rgb(60, 60, 60);
   width: auto;
-  max-width: 300px;
+  /* max-width: 300px; */
   margin: auto;
   padding: 20px;
+  height: 500px;
+  color: white;
+  text-align: center;
+  align-items: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   /* text-align: center; */
 }
 .eye-icon{
   position: relative;
   transform: translateY(-50%);
-  left: 90%;
+  left: 40%;
   margin-top: -20px;
+  color: #090909;
 }
 .sidebar {
   width: 20vw;
+  height: 100vh;
   background-color: #f4f4f4;
   padding: 20px;
   box-sizing: border-box;
@@ -101,7 +156,13 @@ body {
 
 .input-container {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 20px; 
+}
+
+.inputbox{
+  border-radius: 50px;
+  margin: 5px;
+  background-color: whitesmoke;
 }
 
 .input-container input,
@@ -115,20 +176,20 @@ body {
 .input-container button,
 .update-container button {
   padding: 10px 20px;
-  font-size: 16px;
-  background-color: #090909;
+  border-radius: 100%;
+  background-color: black;
   color: #fff;
   border: none;
   cursor: pointer;
-  border-radius: 20px;
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  /* transition: background-color 0.3s, border-color 0.3s, color 0.3s; */
 }
 
 .input-container button:hover,
 .update-container button:hover {
-  background-color: #0c0c0c;
+  background-color: whitesmoke;
+  color: black;
   border-color: #161616;
-  border-radius: 20px;
+  border-radius: 100%;
   flex-wrap: wrap;
 }
 
@@ -145,10 +206,14 @@ body {
   margin-top: 20px;
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
+  border-radius: 50px;
 }
 
 .update-container input {
   margin-right: 10px;
+  border-radius: 50px;
+  background-color: whitesmoke;
 }
 
 .toggle-btn {
@@ -195,4 +260,20 @@ body {
 .list{
   display: flex;
   justify-content: space-between;
+}
+
+@media (min-width:310px) and (max-width:600px){
+  .signinhome{
+    display: flex;
+    flex-direction: column;
+  }
+  img{
+    height: 100%;
+    width: 100% ;
+    background-size: cover;
+  }
+  .form{
+    width: 100%;
+    max-width: auto;
+  }
 }

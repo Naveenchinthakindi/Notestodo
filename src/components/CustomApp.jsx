@@ -9,29 +9,25 @@ function CustomApp({ showpopUP, setShowpopUp, id, keyid, deleteNote }) {
   };
 
   return (
-    <div
-      className="modal show popup"
-      style={{ display: "block", position: "initial" }}
-    >
-      <Modal.Dialog>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <p>Modal body text goes here.</p>
-        </Modal.Body>
-
-        <Modal.Footer>
-          {/* <button  onClick = {()=>setShowpopUp(false)}  variant="secondary"></button> */}
-          <Button onClick={() => setShowpopUp(false)} variant="secondary">
-            Cancel
-          </Button>
-          <Button onClick={() => deletemethod()} variant="secondary">
-            YES
-          </Button>
-        </Modal.Footer>
-      </Modal.Dialog>
+    <div className="modalBackground">
+      <div className="modalContainer">
+        <Modal.Dialog>
+          {/* <Modal.Header>
+            <Modal.Title>Notes</Modal.Title>
+          </Modal.Header> */}
+          <Modal.Body>
+            <p>You Want to Delete the Note</p>
+          </Modal.Body>
+          <Modal.Footer className="footer">
+            <Button onClick={() => setShowpopUp(false)} variant="secondary">
+              Cancel
+            </Button>
+            <Button onClick={() => deletemethod()} variant="secondary">
+              YES
+            </Button>
+          </Modal.Footer>
+        </Modal.Dialog>
+      </div>
     </div>
   );
 }

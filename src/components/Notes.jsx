@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect } from "react";
 import {
   getDatabase,
   ref,
@@ -24,20 +24,33 @@ const Notes = () => {
   const [showpopUP, setShowpopUp] = useState(false);
   const [deleteid, setDeleteId] = useState();
 
-  const colors = ["#FD9A71","#FEC871","#E3ED8E","#B491FB","#00D3FE","#0198e1","#ffbf00","#EDEB4C","#D1FF36","#4DFFFF","#87CEFF","#4E9FFE","#838EDE"]
+  const colors = [
+    "#FD9A71",
+    "#FEC871",
+    "#E3ED8E",
+    "#B491FB",
+    "#00D3FE",
+    "#0198e1",
+    "#ffbf00",
+    "#EDEB4C",
+    "#D1FF36",
+    "#4DFFFF",
+    "#87CEFF",
+    "#4E9FFE",
+    "#838EDE",
+  ];
 
-  const number = Math.ceil(Math.random()*12)
-  console.log("number ",number)
-
-
+  const number = Math.ceil(Math.random() * 12);
+  console.log("number ", number);
 
   useEffect(() => {
     fetchNotes();
   }, []);
+
   const userId = localStorage.getItem("userID");
+  
   const fetchNotes = () => {
     console.log("user ID ", userId);
-
     try {
       const notesRef = ref(db, `users/${userId}/notes`);
       onValue(notesRef, (snapshot) => {
@@ -85,12 +98,12 @@ const Notes = () => {
     try {
       const noteRef = ref(db, `users/${userId}/notes/${selectedNote?.id}`);
 
-      console.log("updated input is ",updateInput)
+      console.log("updated input is ", updateInput);
 
       const [title, ...textArray] = updateInput.split(" ");
-      
-      console.log("title ",title)
-      console.log('text area ',textArray)
+
+      console.log("title ", title);
+      console.log("text area ", textArray);
 
       const text = textArray.join(" ");
       set(noteRef, { title, text });
@@ -123,6 +136,8 @@ const Notes = () => {
 
   // console.log("note is ",note)
 
+  console.log("selectedNote ",selectedNote)
+
   return (
     <>
       <div className={`app ${darkMode ? "dark-mode" : ""}`}>
@@ -131,10 +146,14 @@ const Notes = () => {
           {/* <h1 onClick={clearSelectedNote}>Notes</h1> */}
           <ul className="notes-list">
             {notes.map((note) => (
-              <li className="list" key={note.id} onClick={() => selectNote(note)}>
+              <li
+                className="list"
+                key={note.id}
+                onClick={() => selectNote(note)}
+              >
                 {note.title}
                 <span onClick={() => popUpmethod(note.id)}>
-                  <i  className="bi bi-trash dlt"></i>
+                  <i className="bi bi-trash dlt"></i>
                 </span>
               </li>
             ))}
@@ -160,17 +179,42 @@ const Notes = () => {
               </div>
             </div>
           </div>
-          <div className="input-container">
-            <input
-              type="text"
-              value={noteInput}
-              onChange={(e) => setNoteInput(e.target.value)}
-              placeholder="Enter a title..."
-            />
-            <button onClick={addNote}>+</button>
-          </div>
-
-          <ul className="notes-list" style={{display:'flex' ,flexWrap:'wrap'}}>
+          {selectedNote !==null ? (
+            <div>
+              {selectedNote && (
+                <div className="update-container">
+                  <input
+                    type="text"
+                    value={updateInput}
+                    onChange={(e) => setUpdateInput(e.target.value)}
+                    placeholder="Update note..."
+                  />
+                  <button onClick={updateNote}>Update</button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="input-container">
+              <input
+                type="text"
+                className="inputbox"
+                value={noteInput}
+                onChange={(e) => setNoteInput(e.target.value)}
+                placeholder="Enter a title..."
+                onKeyDown={(e)=>{
+                  if(e.key=== "Enter"){
+                    addNote();
+                  }
+                }}
+              />
+              <button onClick={addNote}>+</button>
+            </div>
+          )}
+        
+          <ul
+            className="notes-list"
+            style={{ display: "flex", flexWrap: "wrap" }}
+          >
             {showpopUP && (
               <CustomApp
                 showpopUP={showpopUP}
@@ -179,36 +223,32 @@ const Notes = () => {
                 keyid={deleteid}
               />
             )}
-            {filteredNotes.map((note,i) => (
-              <li key={note.id} className="list-item-body" style={{backgroundColor:colors[i%colors.length] }}>
+            {filteredNotes.map((note, i) => (
+              <li
+                key={note.id}
+                className="list-item-body"
+                style={{ backgroundColor: colors[i % colors.length] }}
+              >
                 <div>
-                <h2>{note.title}</h2>
-                <p>{note.text}</p>
+                  <h2>{note.title}</h2>
+                  <p>{note.text}</p>
                 </div>
-               
+
                 <div className="buttons-container">
-                  <span onClick={() => deleteNote(note.id)}>
-                  <i  className="bi bi-trash dlt"></i>
-                  </span>
+                <span onClick={() => popUpmethod(note.id)}>
+                  <i className="bi bi-trash dlt"></i>
+                </span>
+                  {/* <span onClick={() => deleteNote(note.id)}>
+                    <i className="bi bi-trash dlt"></i>
+                  </span> */}
                   &nbsp;&nbsp;&nbsp;
                   <span onClick={() => selectNote(note)}>
-                  <i class="bi bi-pen"></i>
+                    <i class="bi bi-pen"></i>
                   </span>
                 </div>
               </li>
             ))}
           </ul>
-          {selectedNote && (
-            <div className="update-container">
-              <input
-                type="text"
-                value={updateInput}
-                onChange={(e) => setUpdateInput(e.target.value)}
-                placeholder="Update note..."
-              />
-              <button onClick={updateNote}>Update</button>
-            </div>
-          )}
         </div>
       </div>
     </>
