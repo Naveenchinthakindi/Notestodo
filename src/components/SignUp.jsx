@@ -117,6 +117,10 @@ function SignIn() {
               placeholder="Enter Password"
               style={{ paddingRight: "2.5rem" }}
               className="mb-2 mt-2"
+              isInvalid={
+                validateErrors?.password 
+              }
+             
             />
             <div
               className="eye-icon"
@@ -133,15 +137,15 @@ function SignIn() {
               placeholder="Confirm Password"
               style={{ paddingRight: "2.5rem" }}
               isInvalid={
-                validateErrors?.password && validateErrors?.confirmpass
+                validateErrors?.confirmpass
               }
             />
             <div
               className="eye-icon"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword && <i class="bi bi-eye-fill"></i>}
-              {!showPassword && <i class="bi bi-eye-slash-fill"></i>}
+              { (!validateErrors?.confirmpass && showPassword )&& <i class="bi bi-eye-fill"></i>}
+              {!validateErrors?.confirmpass && !showPassword && <i class="bi bi-eye-slash-fill"></i>}
             </div>
 
             <Form.Control.Feedback className="mt-4" type="invalid">
